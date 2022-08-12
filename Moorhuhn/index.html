@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Aclonica"
+      rel="stylesheet"
+    />
+    <title>Moorhuhn</title>
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body>
+    <div class="board">
+      <!-- <button id="hide-title">Hide Title</button> -->
+      <div id="grass" class="grass">
+        <div id="insertChickenArea"></div>
+        <h1 id="title">Moorhuhn</h1>
+        <div class="cont">
+          <button id="start-btn">Start Game</button>
+        </div>
+      </div>
+      <div class="ground">
+        <div class="contdiv">
+          <h1 id="scoreboard">Scoreboard</h1>
+        </div>
+        <div class="contdiv input-p-div">
+          <div>
+            <form id="user-name-form">
+              <p>Enter name please...</p> <input id="user-name-input">
+            </form>
+          </div>
+          <div id="score-div">
+            <p>Current Player</p>
+            <p id="score"></p>
+          </div>
+        </div>
+        <div class="contdiv">
+          <button id="reset">Reset Gamestate</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
