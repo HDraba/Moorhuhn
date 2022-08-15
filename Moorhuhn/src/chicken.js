@@ -8,18 +8,20 @@ import {
   scoreDiv,
 } from '../main';
 import { getScore, userNameInput } from './scoreboard';
-// const { currentScore } = currentScoreUserName.currentScore
-// const { userName } = currentScoreUserName.userName
 
 let chickenCounter = 0;
+let blinkyInterval;
+
+function randomTime() {
+  return Math.random() * 2000 + 200;
+}
+console.log(randomTime());
 
 const movingChicken = (targetChick) => {
+  console.log("I'm two");
   const xCoords = getRandomCoordinates(arenaX, arenaR) + 'px';
   const yCoords = getRandomCoordinates(arenaY, arenaB) + 'px';
-  const styles = `top: ${yCoords}; left: ${xCoords}; transition: ${
-    Math.random() * 2000 + 200
-  } + ms`;
-  targetChick.style.cssText = styles;
+  targetChick.style = `top: ${yCoords}; left: ${xCoords}; transition: ${randomTime()};`;
 };
 
 const createNewChicken = () => {
@@ -28,14 +30,16 @@ const createNewChicken = () => {
     'src',
     'https://cdn.imgbin.com/10/3/20/imgbin-dead-man-s-hand-moorhuhn-the-settlers-7-paths-to-a-kingdom-computer-icons-xiii-others-54JUqkV2eLFasFMnRnP9rSDi1.jpg'
   );
-  newChick.style.maxWidth = '100px';
-  newChick.style.maxHeight = '100px';
   newChick.style.left = getRandomCoordinates(arenaX, arenaR) + 'px';
   newChick.style.top = getRandomCoordinates(arenaY, arenaB) + 'px';
-  newChick.style.position = 'absolute';
+  console.log("I'm here");
   newChick.classList.add('chicken');
   insertChickenArea.appendChild(newChick);
-  movingChicken(newChick)
+
+  blinkyInterval = setInterval(() => {
+    movingChicken(newChick);
+    console.log(randomTime());
+  }, randomTime());
 };
 
 const clickChickenHandler = (chick) => {
@@ -44,7 +48,6 @@ const clickChickenHandler = (chick) => {
   getScore();
   chickenCounter--;
   if (chickenCounter === 0) {
-    console.log(chickenCounter);
     const bdDiv = document.createElement('div');
     bdDiv.classList.toggle('backdrop');
 
@@ -56,14 +59,12 @@ const clickChickenHandler = (chick) => {
     bdDivBtn.addEventListener('click', () => {
       bdDiv.classList.toggle('backdrop');
       document.body.removeChild(bdDiv);
-
+      console.log(chickenCounter);
       const newScoreEntry = document.createElement('p');
       if (currentScoreUserName.userName === '') {
-        console.log('1');
         currentScoreUserName.userName = 'DUMMY';
         newScoreEntry.textContent = `${currentScoreUserName.userName}: ${currentScoreUserName.currentScore}`;
       } else {
-        console.log('2');
         newScoreEntry.textContent = `${currentScoreUserName.userName}: ${currentScoreUserName.currentScore}`;
       }
       scoreDiv.appendChild(newScoreEntry);

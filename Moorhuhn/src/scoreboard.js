@@ -1,8 +1,4 @@
 import { currentScoreUserName } from '../main';
-// import('./main/currentScoreUserName')
-// const { currentScore } = currentScoreUserName.currentScore;
-// const { userName } = currentScoreUserName;
-
 
 export const userNameInput = document.getElementById('user-name-input');
 const userNameForm = document.getElementById('user-name-form');
@@ -13,10 +9,19 @@ export const getScore = () => {
   if (currentScoreUserName.userName === '') {
     return;
   } else {
-    if (!currentScoreUserName.userName && currentScoreUserName.userName !== defaultInputPrompt) {
+    if (
+      !currentScoreUserName.userName &&
+      currentScoreUserName.userName !== defaultInputPrompt
+    ) {
       score.textContent = 'Current Dummy: ' + currentScoreUserName.currentScore;
-    } else if (currentScoreUserName.userName && currentScoreUserName.userName !== defaultInputPrompt) {
-      score.textContent = currentScoreUserName.userName + ': ' + currentScoreUserName.currentScore;
+    } else if (
+      currentScoreUserName.userName &&
+      currentScoreUserName.userName !== defaultInputPrompt
+    ) {
+      score.textContent =
+        currentScoreUserName.userName +
+        ': ' +
+        currentScoreUserName.currentScore;
     }
   }
 };

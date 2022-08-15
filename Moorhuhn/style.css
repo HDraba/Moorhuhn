@@ -34,6 +34,13 @@ button {
   padding-top: 15px;
 }
 
+#insertChickenArea img {
+  max-height: 100px;
+  max-width: 100px;
+  position: absolute;
+
+}
+
 .ground p {
   padding-top: 20px;
 }
