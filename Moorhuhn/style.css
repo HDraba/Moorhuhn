@@ -93,3 +93,9 @@ justify-content: center;
 .backdrop h2 {
   position: fixed; top: 33vh; font-size: 3rem; color: white;
 }
+
+/* ----------------------------------- MOVE --------------------------------- */
+
+.moving {
+  transition: 2000ms;
+}

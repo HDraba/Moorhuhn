@@ -1,17 +1,22 @@
-import { currentScore, userName } from "../main";
+import { currentScoreUserName } from '../main';
+// import('./main/currentScoreUserName')
+// const { currentScore } = currentScoreUserName.currentScore;
+// const { userName } = currentScoreUserName;
 
-const userNameInput = document.getElementById('user-name-input');
+
+export const userNameInput = document.getElementById('user-name-input');
+const userNameForm = document.getElementById('user-name-form');
 
 const defaultInputPrompt = 'Enter a name please...';
 
 export const getScore = () => {
-  if (userName === '') {
+  if (currentScoreUserName.userName === '') {
     return;
   } else {
-    if (!userName && userName !== defaultInputPrompt) {
-      score.textContent = 'Current Dummy: ' + currentScore;
-    } else if (userName && userName !== defaultInputPrompt) {
-      score.textContent = userName + ': ' + currentScore;
+    if (!currentScoreUserName.userName && currentScoreUserName.userName !== defaultInputPrompt) {
+      score.textContent = 'Current Dummy: ' + currentScoreUserName.currentScore;
+    } else if (currentScoreUserName.userName && currentScoreUserName.userName !== defaultInputPrompt) {
+      score.textContent = currentScoreUserName.userName + ': ' + currentScoreUserName.currentScore;
     }
   }
 };
@@ -22,7 +27,7 @@ userNameInput.addEventListener('click', () => {
 
 userNameForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  userName = userNameInput.value;
+  currentScoreUserName.userName = userNameInput.value;
   getScore();
   userNameInput.value = '';
 });

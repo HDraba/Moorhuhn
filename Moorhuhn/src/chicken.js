@@ -1,7 +1,26 @@
-import { getRandomCoordinates } from "../util/randomCoords";
-import { currentScore, userName } from "../main";
+import { getRandomCoordinates } from '../util/randomCoords';
+import {
+  currentScoreUserName,
+  arenaB,
+  arenaR,
+  arenaX,
+  arenaY,
+  scoreDiv,
+} from '../main';
+import { getScore, userNameInput } from './scoreboard';
+// const { currentScore } = currentScoreUserName.currentScore
+// const { userName } = currentScoreUserName.userName
 
 let chickenCounter = 0;
+
+const movingChicken = (targetChick) => {
+  const xCoords = getRandomCoordinates(arenaX, arenaR) + 'px';
+  const yCoords = getRandomCoordinates(arenaY, arenaB) + 'px';
+  const styles = `top: ${yCoords}; left: ${xCoords}; transition: ${
+    Math.random() * 2000 + 200
+  } + ms`;
+  targetChick.style.cssText = styles;
+};
 
 const createNewChicken = () => {
   const newChick = document.createElement('img');
@@ -16,11 +35,12 @@ const createNewChicken = () => {
   newChick.style.position = 'absolute';
   newChick.classList.add('chicken');
   insertChickenArea.appendChild(newChick);
+  movingChicken(newChick)
 };
 
 const clickChickenHandler = (chick) => {
   insertChickenArea.removeChild(chick);
-  currentScore++;
+  currentScoreUserName.currentScore++;
   getScore();
   chickenCounter--;
   if (chickenCounter === 0) {
@@ -29,7 +49,7 @@ const clickChickenHandler = (chick) => {
     bdDiv.classList.toggle('backdrop');
 
     const bdDivH = document.createElement('h2');
-    bdDivH.textContent = `Game won, you've shot ${currentScore} chicken`;
+    bdDivH.textContent = `Game won, you've shot ${currentScoreUserName.currentScore} chicken`;
 
     const bdDivBtn = document.createElement('button');
     bdDivBtn.textContent = 'OK';
@@ -38,16 +58,16 @@ const clickChickenHandler = (chick) => {
       document.body.removeChild(bdDiv);
 
       const newScoreEntry = document.createElement('p');
-      if (userName === '') {
+      if (currentScoreUserName.userName === '') {
         console.log('1');
-        userName = 'DUMMY';
-        newScoreEntry.textContent = `${userName}: ${currentScore}`;
+        currentScoreUserName.userName = 'DUMMY';
+        newScoreEntry.textContent = `${currentScoreUserName.userName}: ${currentScoreUserName.currentScore}`;
       } else {
         console.log('2');
-        newScoreEntry.textContent = `${userName}: ${currentScore}`;
+        newScoreEntry.textContent = `${currentScoreUserName.userName}: ${currentScoreUserName.currentScore}`;
       }
       scoreDiv.appendChild(newScoreEntry);
-      userName = userNameInput.value;
+      currentScoreUserName.userName = userNameInput.value;
       score.innerHTML = '';
     });
 
