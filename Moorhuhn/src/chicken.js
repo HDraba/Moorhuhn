@@ -10,15 +10,13 @@ import {
 import { getScore, userNameInput } from './scoreboard';
 
 let chickenCounter = 0;
-let blinkyInterval;
+// let blinkyInterval;
 
 function randomTime() {
-  return Math.random() * 2000 + 200;
+  return Math.random() * 2000 + 1200;
 }
-console.log(randomTime());
 
 const movingChicken = (targetChick) => {
-  console.log("I'm two");
   const xCoords = getRandomCoordinates(arenaX, arenaR) + 'px';
   const yCoords = getRandomCoordinates(arenaY, arenaB) + 'px';
   targetChick.style = `top: ${yCoords}; left: ${xCoords}; transition: ${randomTime()};`;
@@ -36,10 +34,22 @@ const createNewChicken = () => {
   newChick.classList.add('chicken');
   insertChickenArea.appendChild(newChick);
 
-  blinkyInterval = setInterval(() => {
+  let blinkyInterval = setInterval(function () {
     movingChicken(newChick);
-    console.log(randomTime());
   }, randomTime());
+  newChick.addEventListener('click', () => {
+    clearInterval(blinkyInterval);
+  });
+
+  /*for (let i=0; i<50; i++)   {
+    let timeOut = setTimeout(() => {
+        movingChicken(newChick);
+        console.log('Hey');
+      }, randomTime());
+  }
+  newChick.addEventListener('click', () => {
+    clearTimeout(timeOut);
+  });*/
 };
 
 const clickChickenHandler = (chick) => {
@@ -88,6 +98,7 @@ export const initChicken = (amount) => {
   allChicken.forEach((chick) => {
     chick.addEventListener('click', () => {
       clickChickenHandler(chick);
+      // clearInterval(blinkyInterval)
     });
   });
 };
