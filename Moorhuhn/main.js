@@ -1,6 +1,7 @@
 import './style.css';
 import { getScore, userNameInput } from "./src/scoreboard";
-import { initChicken } from "./src/chicken";
+// import { initChicken } from "./src/chicken";
+import { initChicken } from "./src/objectChicken";
 
 const titleh1 = document.getElementById('title');
 const startBtn = document.getElementById('start-btn');
@@ -12,8 +13,11 @@ const arena = document.getElementById('grass');
 const grassPosition = arena.getBoundingClientRect();
 export const arenaX = grassPosition.left + 20;
 export const arenaY = grassPosition.top + 20;
-export const arenaR = grassPosition.right - 120;
-export const arenaB = grassPosition.bottom - 120;
+export const arenaR = arenaX + grassPosition.width - 150;
+export const arenaB = arenaY + grassPosition.height - 120;
+
+// export const arenaR = grassPosition.right - 120;
+// export const arenaB = grassPosition.bottom - 120;
 const insertChickenArea = document.getElementById('insertChickenArea');
 export const scoreDiv = document.getElementById('score-div');
 
