@@ -30,9 +30,23 @@ class Chicken {
     }, this.timer());
   }
 
-  clickChicken() {
+  createChicken() {
+    const chickenEl = document.createElement('img');
+    chickenEl.setAttribute(
+      'src',
+      'https://cdn.imgbin.com/10/3/20/imgbin-dead-man-s-hand-moorhuhn-the-settlers-7-paths-to-a-kingdom-computer-icons-xiii-others-54JUqkV2eLFasFMnRnP9rSDi1.jpg'
+    );
+    chickenEl.style.left = getRandomCoordinates(arenaX, arenaR) + 'px';
+    chickenEl.style.top = getRandomCoordinates(arenaY, arenaB) + 'px';
+    chickenEl.classList.add('chicken');
+    insertChickenArea.appendChild(chickenEl);
+    return chickenEl;
+  }
+
+  clickChicken(chickenElement) {
     console.log('click');
-    insertChickenArea.removeChild(this.chicken);
+    console.log(this.chicken);
+    insertChickenArea.removeChild(chickenElement);
     currentScoreUserName.currentScore++;
     getScore();
     chickenCounter--;
@@ -66,12 +80,6 @@ class Chicken {
       bdDiv.appendChild(bdDivBtn);
     }
   }
-  helloChicken() {
-    this.chicken.addEventListener('click', () => {
-      this.clickChicken;
-    });
-    // console.log(this.chicken);
-  }
 }
 
 export const initChicken = (amount) => {
@@ -79,29 +87,13 @@ export const initChicken = (amount) => {
   let chickens = [];
   for (let i = 1; i <= amount; i++) {
     let newChicken = new Chicken('newInstanceOfChicken');
+    const chickenElement = newChicken.createChicken();
     chickens.push(newChicken);
-    console.log(chickens);
-    newChicken.helloChicken();
-    // newChicken.addEventListener('click', newChicken.clickChicken);
+    console.log(chickenElement);
+    chickenElement.addEventListener('click', () => {
+      newChicken.clickChicken(chickenElement);
+    });
   }
-  chickens.forEach(() => {
-    const chickenEl = document.createElement('img');
-    chickenEl.setAttribute(
-      'src',
-      'https://cdn.imgbin.com/10/3/20/imgbin-dead-man-s-hand-moorhuhn-the-settlers-7-paths-to-a-kingdom-computer-icons-xiii-others-54JUqkV2eLFasFMnRnP9rSDi1.jpg'
-    );
-    chickenEl.style.left = getRandomCoordinates(arenaX, arenaR) + 'px';
-    chickenEl.style.top = getRandomCoordinates(arenaY, arenaB) + 'px';
-    chickenEl.classList.add('chicken');
-    insertChickenArea.appendChild(chickenEl);
-  });
-  //   chickens.forEach((Chicken) => {
-  // console.log(Chicken);
-  // Chicken.HandleClick = Chicken.addEventListener(
-  //   'click',
-  //   Chicken.clickChicken
-  // );
-  //   });
 };
 
 // IDEE: beim Erstellen eines Objektes der Klasse Chicken, den Eventlistener hinzufügen als Methode
